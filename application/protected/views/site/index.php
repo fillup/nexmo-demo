@@ -4,17 +4,48 @@
 $this->pageTitle=Yii::app()->name;
 ?>
 
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
+<h1>Nexmo Demo <small>SMS Proxy Example</small></h1>
+<form class="form-horizontal" role="form">
+    <div class="form-group">
+        <label for="inputKey" class="col-sm-2 control-label">Nexmo API Key</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" id="inputKey" placeholder="Key">
+        </div>
+    </div>
 
-<p>Congratulations! You have successfully created your Yii application.</p>
+    <div class="form-group">
+        <label for="inputSecret" class="col-sm-2 control-label">Nexmo API Secret</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" id="inputSecret" placeholder="Secret">
+        </div>
+    </div>
 
-<p>You may change the content of this page by modifying the following two files:</p>
-<ul>
-	<li>View file: <code><?php echo __FILE__; ?></code></li>
-	<li>Layout file: <code><?php echo $this->getLayoutFile('main'); ?></code></li>
-</ul>
+    <div class="form-group">
+        <label for="inputPhone" class="col-sm-2 control-label">To Phone</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" id="inputPhone" placeholder="2125551212">
+        </div>
+    </div>
 
-<p>For more details on how to further develop this application, please read
-the <a href="http://www.yiiframework.com/doc/">documentation</a>.
-Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
-should you have any questions.</p>
+    <div class="form-group">
+        <label for="inputMessage" class="col-sm-2 control-label">Message</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="inputMessage" placeholder="Well...hello.">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"> Remember me
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Send Message</button>
+        </div>
+    </div>
+</form>
