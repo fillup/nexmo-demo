@@ -1,7 +1,8 @@
 {
     "require": {
         "yiisoft/yii": "1.1.*",
-        "guzzle/guzzle": "3.7.*"
+        "guzzlehttp/guzzle": "~4.0",
+        "crisu83/yiistrap": "dev-bs3"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*"
