@@ -2,6 +2,9 @@
 
 Just for fun this application is used for proxying text messages to someone so that you can hide your real phone number from the recipient.
 
+To use the app, just paste in your api key and secret, click to load phone numbers from your account in order to
+choose which one you want to send from, then enter the phone number to send a text to, a message, and your done :-)
+
 ## Getting Started ##
 1. Clone the repo
 2. Make sure you have [Vagrant](http://vagrantup.com) and [VirtualBox](http://virtualbox.org)
