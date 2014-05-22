@@ -99,5 +99,10 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'phillip@phillipshipley.com',
+        'nexmo' => array(
+            'smsEndpoint' => 'https://rest.nexmo.com/sms/json',
+            'callEndpoint' => 'https://rest.nexmo.com/call/json',
+            'accountEndpoint' => 'https://rest.nexmo.com/account',
+        ),
 	),
 );

@@ -6,7 +6,10 @@
 
 // change the following paths if necessary
 $yii=__DIR__.'/../vendor/yiisoft/yii/framework/yii.php';
-$config=__DIR__.'/../protected/config/test.php';
+
+
+$configMain = require __DIR__.'/../protected/config/main.php';
+$configEnv = require __DIR__.'/../protected/config/local.php';
 
 // remove the following line when in production mode
 defined('YII_DEBUG') or define('YII_DEBUG',true);
@@ -17,4 +20,7 @@ if (file_exists(__DIR__.'/../vendor/autoload.php')) {
 }
 
 require_once($yii);
+
+$config = CMap::mergeArray( $configMain, $configEnv );
+
 Yii::createWebApplication($config)->run();
