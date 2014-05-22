@@ -46,15 +46,6 @@ $this->pageTitle=Yii::app()->name;
     </div>
 
     <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox"> Remember me
-                </label>
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
         <div class="col-sm-offset-2 col-sm-3">
             <a class="btn btn-default" id="sendSmsButton" href="javascript:void()">Send Message</a>
         </div>
@@ -63,6 +54,9 @@ $this->pageTitle=Yii::app()->name;
         </div>
     </div>
 </form>
+<div class="col-sm-12" style="display:none;" id="historyDiv">
+    <h3>History with <span id="toPhoneText"></span></h3>
+</div>
 
 <script type="text/javascript">
     $(function(){
@@ -87,7 +81,9 @@ $this->pageTitle=Yii::app()->name;
         });
 
         $('#sendSmsButton').click(function(){
-            $('#successMessage').hide();
+            $('#successMessage').hide().empty();
+            $('#historyDiv').hide();
+            $('#historyData').empty();
             $.ajax({
                 url: '<?php echo Yii::app()->createUrl('site/sendSms'); ?>',
                 type: 'post',
@@ -101,10 +97,60 @@ $this->pageTitle=Yii::app()->name;
                 success: function(response){
                     console.log(response);
                     var msg = 'Status Code: '+response.messages[0].status;
+                    if(response.messages[0].status !== "0"){
+                        msg += '<br />Error: '+response.messages[0]['error-text'];
+                    }
                     $('#successMessage').empty().append(msg);
                     $('#successMessage').fadeIn();
+
+                    getHistoryToNumber();
                 }
             });
         });
     });
+
+    function getHistoryToNumber(){
+        $.ajax({
+            url: '<?php echo Yii::app()->createUrl('site/getHistoryToNumber'); ?>',
+            type: 'post',
+            data: {
+                key: $('#inputKey').val(),
+                secret: $('#inputSecret').val(),
+                to: $('#inputToPhone').val()
+            },
+            success: function(response){
+                console.log(response);
+                if(response['error-code']){
+                    $('#historyData').append('<dt>Error</dt>');
+                    $('#historyData').append('<dd>'+response['error-code']+'</dd>');
+                } else {
+                    $('#historyDiv').append('Total Messages: '+response.count);
+                    for(var i=0; i<response.count; i++){
+                        $('#historyDiv').append('<dl>');
+
+                        $('#historyDiv').append('<dt>Date Received</dt>');
+                        $('#historyDiv').append('<dd>'+response.items[i]['date-received']+'</dd>');
+
+                        $('#historyDiv').append('<dt>Type</dt>');
+                        $('#historyDiv').append('<dd>'+response.items[i]['type']+'</dd>');
+
+                        $('#historyDiv').append('<dt>Message ID</dt>');
+                        $('#historyDiv').append('<dd>'+response.items[i]['message-id']+'</dd>');
+
+                        $('#historyDiv').append('<dt>From</dt>');
+                        $('#historyDiv').append('<dd>'+response.items[i]['from']+'</dd>');
+
+                        $('#historyDiv').append('<dt>Body</dt>');
+                        $('#historyDiv').append('<dd>'+response.items[i]['body']+'</dd>');
+
+
+                        $('#historyDiv').append('</dl>');
+                    }
+
+                }
+                $('#toPhoneText').empty().append($('#inputToPhone').val());
+                $('#historyDiv').fadeIn();
+            }
+        });
+    }
 </script>

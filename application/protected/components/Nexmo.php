@@ -50,5 +50,19 @@ class Nexmo {
         }
     }
 
+    public function getHistoryToNumber($to,$since)
+    {
+
+        $client = new Client();
+        $url = Yii::app()->params['nexmo']['searchEndpoint'].'/messages/'.$this->key.'/'.$this->secret.'?to='.$to.'&date='.$since;
+        try{
+            $response = $client->get($url);
+
+            return $response->json();
+        } catch (RequestException $e) {
+            return $e->getMessage();
+        }
+    }
+
 
 }
