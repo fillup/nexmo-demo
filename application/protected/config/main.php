@@ -103,6 +103,7 @@ return array(
             'smsEndpoint' => 'https://rest.nexmo.com/sms/json',
             'callEndpoint' => 'https://rest.nexmo.com/call/json',
             'accountEndpoint' => 'https://rest.nexmo.com/account',
+            'searchEndpoint' => 'https://rest.nexmo.com/search',
         ),
 	),
 );
