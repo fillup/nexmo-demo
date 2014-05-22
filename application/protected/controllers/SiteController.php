@@ -69,6 +69,18 @@ class SiteController extends Controller
         $this->returnJson($response);
     }
 
+    public function actionGetHistoryToNumber()
+    {
+        $key     = Yii::app()->request->getParam('key',false);
+        $secret  = Yii::app()->request->getParam('secret',false);
+        //$since   = Yii::app()->request->getParam('since',false);
+        $to      = Yii::app()->request->getParam('to',false);
+
+        $nexmo = new Nexmo($key,$secret);
+        $response = $nexmo->getHistoryToNumber($to,date('Y-m-d',time()));
+        $this->returnJson($response);
+    }
+
     public function returnJson($data,$status=200)
     {
         $this->layout = null;
