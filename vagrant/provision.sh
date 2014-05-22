@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Install Apache and PHP (and any needed extensions).
 sudo apt-get install -y git curl php5 php5-curl
